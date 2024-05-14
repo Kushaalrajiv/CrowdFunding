@@ -112,11 +112,12 @@ export default function HomePage() {
     <main className="container">
       <header>
         <h1>Crowd Funding</h1>
+        <h2>Help us in our mission!</h2>
       </header>
       {ethWallet && account ? (
         <div className="user-info">
-          <p>Your Account: {account}</p>
-          <p>Contract Status: {contractStatus}</p>
+          <p style={{ fontWeight: 'bold', fontSize: '20px', color: '#008c8c' }}>Your Account: {account}</p>
+          <p style={{ fontWeight: 'bold', fontSize: '20px', color: contractStatus === 'Open' ? '#4caf50' : '#f44336' }}>Contract Status: {contractStatus}</p>
           <div className="contribution-input">
             {contractStatus === "Open" && (
               <>
@@ -145,7 +146,7 @@ export default function HomePage() {
               </>
             )}
             {contractStatus === "Closed" && (
-              <button onClick={withdrawFunds}>Withdraw Funds</button>
+              <button className="withdraw-button" onClick={withdrawFunds}>Withdraw Funds</button>
             )}
           </div>
         </div>
@@ -155,7 +156,7 @@ export default function HomePage() {
         </button>
       )}
       <div className="contribution-table">
-        <h2>Contributors and Contributions</h2>
+      <h2 className="mesaage">Thanks to our generous Contributors!!</h2>
         <table>
           <thead>
             <tr>
@@ -174,30 +175,78 @@ export default function HomePage() {
         </table>
       </div>
       <style jsx>
-        {`
-          
-        
-          .container {
-            background-color:white;
-            text-align: center;
-            border: 8px solid blue;
-            padding: 20px;
-            max-width: 600px;
-            margin: 0 auto;
-          }
+        {`.{
+          margin:0;
+          padding:0;
+        }
+        body {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+          margin: 0;
+          background-image: url('https://visme.co/blog/wp-content/uploads/2017/07/50-Beautiful-and-Minimalist-Presentation-Backgrounds-08.jpg');
+          background-size: cover; /* Cover the entire page */
+          background-repeat: no-repeat; /* Prevent the image from repeating */
+          background-position: center; /* Center the image */
+          font-family: Arial, sans-serif;
+        }
 
-          .connect-button {
-            background-color: #008c8c;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-          }
+        .container {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          border: 2px solid #008c8c;
+          padding: 20px;
+          border-radius: 10px;
+          background-image: url('https://visme.co/blog/wp-content/uploads/2017/07/50-Beautiful-and-Minimalist-Presentation-Backgrounds-08.jpg');
+          background-size: cover; /* Cover the entire page */
+          background-repeat: no-repeat; /* Prevent the image from repeating */
+          background-position: center; /* Center the image */
+          box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
 
-          .user-info {
-            margin-top: 20px;
-          }
+        .connect-button {
+          background-color: #008c8c;
+          color: white;
+          border: none;
+          padding: 10px 20px;
+          font-size: 16px;
+          cursor: pointer;
+          margin-top: 20px;
+          border-radius: 5px;
+          transition: background-color 0.3s ease;
+        }
+
+        .connect-button:hover {
+          background-color: #006868;
+        }
+
+        .user-info {
+          margin-top: 20px;
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          align-items: center;
+        }
+
+        .withdraw-button {
+          background-color: #008c8c;
+          color: white;
+          border: none;
+          padding: 10px 20px;
+          font-size: 16px;
+          cursor: pointer;
+          margin-top: 20px;
+          border-radius: 5px;
+          transition: background-color 0.3s ease;
+        }
+
+        .withdraw-button:hover {
+          background-color: #006868;
+        }
 
           .contribution-input {
             margin-top: 20px;
@@ -211,6 +260,10 @@ export default function HomePage() {
 
           .contribution-table {
             margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
           }
 
           .contribution-table table {
@@ -220,20 +273,40 @@ export default function HomePage() {
 
           .contribution-table th,
           .contribution-table td {
-            border: 1px solid black;
-            padding: 8px;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
           }
-          .withdraw-button {
-            background-color: #ff0000; /* Red */
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            border-radius: 5px;
-            margin-top: 10px;
+
+          h1, h2{
+            color: #005b7e;
+            text-align: center;
+            transition: color 0.3s ease;
+            font-size: 44px; /* Change this to the size you want */
+            
           }
-        `}
+          h1:hover, h2:hover{
+            color: #008c8c;
+            text-shadow: 0 0 2px #f0f0f0, 0 0 2px #f0f0f0, 0 0 2px #f0f0f0, 0 0 2px #f0f0f0;
+          }
+
+          .mesaage{
+            color: #008c8c;
+            text-align: center;
+          }
+
+          .message:hover{
+            text-shadow: none;
+          }
+
+
+          // h1{
+          //   font-size: 44px; /* Change this to the size you want */
+          // }
+          h2{
+            font-size: 26px; /* Change this to the size you want */
+          }
+        `
+          }
       </style>
     </main>
   );
