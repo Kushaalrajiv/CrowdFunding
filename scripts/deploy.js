@@ -10,7 +10,7 @@ async function main() {
   const goal = ethers.utils.parseEther("0.004");
   const Assessment = await hre.ethers.getContractFactory("Lock");
   const assessment = await Assessment.deploy(ownerAddress, goal, {
-    gasLimit: 3000000, // Adjust gas limit as needed
+    gasLimit: 1000000, // Adjust gas limit as needed
   });
 
   console.log(`A contract deployed to ${assessment.address}`);
