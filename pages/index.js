@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { ethers } from "ethers";
 import LockContract from "../artifacts/contracts/Assessment.sol/Lock.json"; 
+// import './index.css';
 
 export default function HomePage() {
   const [ethWallet, setEthWallet] = useState(undefined);
@@ -12,7 +13,7 @@ export default function HomePage() {
   const [contractStatus, setContractStatus] = useState("Open"); 
   const [buttonHovered, setButtonHovered] = useState(false); 
 
-  const contractAddress = "0xd970e69fd71cDCC46dA64DCDBAeBDC7554177036"; 
+  const contractAddress = "0x5432A921CC9111AB010aE115bc36d3CF594bf9e8"; 
   const lockABI = LockContract.abi;
 
   const getWallet = async () => {
@@ -47,14 +48,17 @@ export default function HomePage() {
     if (lockContract && newContribution !== "") {
       try {
         // Convert the entered contribution to wei
-        const contributionWei = ethers.utils.parseEther("0.002");
+        const contributionWei = ethers.utils.parseEther(newContribution);
         const tx = await lockContract.contribute({ value: contributionWei });
         await tx.wait(); 
-      
+        
+        // Clear the input field after successful contribution
+        setNewContribution("");
+  
+        // Refresh contributions data
         await getContributions();
       } catch (error) {
         console.error("Error contributing funds:", error);
-       
       }
     }
   };
@@ -65,6 +69,7 @@ export default function HomePage() {
       
         const tx = await lockContract.withdrawFunds();
         await tx.wait(); 
+        alert('Withdrawn Successfully!');
     
       } catch (error) {
         console.error("Error withdrawing funds:", error);
@@ -170,7 +175,10 @@ export default function HomePage() {
       </div>
       <style jsx>
         {`
+          
+        
           .container {
+            background-color:white;
             text-align: center;
             border: 8px solid blue;
             padding: 20px;
@@ -214,6 +222,16 @@ export default function HomePage() {
           .contribution-table td {
             border: 1px solid black;
             padding: 8px;
+          }
+          .withdraw-button {
+            background-color: #ff0000; /* Red */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
           }
         `}
       </style>
